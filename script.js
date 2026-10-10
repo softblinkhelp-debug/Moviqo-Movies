@@ -1,4 +1,3 @@
-
 const searchInput = document.getElementById("searchInput");
 const clearSearch = document.getElementById("clearSearch");
 const movieGrid = document.getElementById("movieGrid");
