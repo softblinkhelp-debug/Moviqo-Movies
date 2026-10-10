@@ -1,1 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover movies, explore genres, and find your next watch with MOVIQO.">
+  <title>MOVIQO — Discover Your Next Movie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="MOVIQO home"><span class="brand-mark">M</span><span>MOVI<span class="brand-accent">QO</span></span></a>
+    <nav class="nav">
+      <a class="active" href="#home">Discover</a><a href="#trending">Trending</a><a href="#genres">Genres</a>
+    </nav>
+    <button class="search-toggle" id="focusSearch" aria-label="Focus search">⌕</button>
+  </header>
 
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow"><span class="live-dot"></span> YOUR NEXT FAVORITE FILM STARTS HERE</p>
+        <h1>Find your next<br><span>movie obsession.</span></h1>
+        <p class="hero-copy">Explore films, discover hidden gems, and decide what to watch next.</p>
+        <div class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Search movies, genres, or keywords..." autocomplete="off">
+          <button id="clearSearch" class="clear-search" aria-label="Clear search">×</button>
+        </div>
+        <div class="hero-tags"><span>Popular now</span><span>Curated discovery</span><span>Worldwide cinema</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="poster poster-back"><div class="poster-sun"></div><span>THE<br>UNKNOWN</span></div>
+        <div class="poster poster-front"><div class="poster-moon"></div><span>AFTER<br>THE LIGHTS</span><small>A FILM DISCOVERY</small></div>
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+      </div>
+    </section>
+
+    <section class="section" id="trending">
+      <div class="section-heading">
+        <div><p class="eyebrow">HANDPICKED FOR YOU</p><h2>Trending discoveries</h2></div>
+        <span class="section-note">Demo titles · connect a movie data API to go live</span>
+      </div>
+      <div class="movie-grid" id="movieGrid">
+        <article class="movie-card" data-title="Dune Part Two" data-genre="Sci-Fi Adventure"><div class="movie-poster dune"><span class="poster-label">EPIC SCI-FI</span><div class="poster-title">DUNE<br><small>PART TWO</small></div></div><div class="movie-info"><div><h3>Dune: Part Two</h3><p>Sci-Fi · Adventure</p></div><span class="rating">★ 8.5</span></div></article>
+        <article class="movie-card" data-title="Spider-Man Across the Spider-Verse" data-genre="Animation Action"><div class="movie-poster spider"><span class="poster-label">ANIMATION</span><div class="poster-title">ACROSS<br><small>THE VERSE</small></div></div><div class="movie-info"><div><h3>Across the Spider-Verse</h3><p>Animation · Action</p></div><span class="rating">★ 8.6</span></div></article>
+        <article class="movie-card" data-title="Interstellar" data-genre="Sci-Fi Drama"><div class="movie-poster interstellar"><span class="poster-label">TIME & SPACE</span><div class="poster-title">INTER<br>STELLAR</div></div><div class="movie-info"><div><h3>Interstellar</h3><p>Sci-Fi · Drama</p></div><span class="rating">★ 8.7</span></div></article>
+        <article class="movie-card" data-title="The Batman" data-genre="Crime Action"><div class="movie-poster batman"><span class="poster-label">DARK THRILLER</span><div class="poster-title">THE<br>BATMAN</div></div><div class="movie-info"><div><h3>The Batman</h3><p>Crime · Action</p></div><span class="rating">★ 7.8</span></div></article>
+        <article class="movie-card" data-title="Everything Everywhere All at Once" data-genre="Comedy Sci-Fi"><div class="movie-poster everything"><span class="poster-label">REALITY-BENDING</span><div class="poster-title">EVERYTHING<br><small>EVERYWHERE</small></div></div><div class="movie-info"><div><h3>Everything Everywhere</h3><p>Comedy · Sci-Fi</p></div><span class="rating">★ 7.8</span></div></article>
+        <article class="movie-card" data-title="The Grand Budapest Hotel" data-genre="Comedy Drama"><div class="movie-poster budapest"><span class="poster-label">OFFBEAT COMEDY</span><div class="poster-title">GRAND<br>BUDAPEST</div></div><div class="movie-info"><div><h3>The Grand Budapest Hotel</h3><p>Comedy · Drama</p></div><span class="rating">★ 8.1</span></div></article>
+        <article class="movie-card" data-title="Spirited Away" data-genre="Animation Fantasy"><div class="movie-poster spirited"><span class="poster-label">ANIMATED CLASSIC</span><div class="poster-title">SPIRITED<br>AWAY</div></div><div class="movie-info"><div><h3>Spirited Away</h3><p>Animation · Fantasy</p></div><span class="rating">★ 8.6</span></div></article>
+        <article class="movie-card" data-title="Oppenheimer" data-genre="Drama History"><div class="movie-poster oppenheimer"><span class="poster-label">HISTORICAL DRAMA</span><div class="poster-title">OPPEN<br>HEIMER</div></div><div class="movie-info"><div><h3>Oppenheimer</h3><p>Drama · History</p></div><span class="rating">★ 8.3</span></div></article>
+      </div>
+      <p id="noResults" class="no-results" hidden>No matches found. Try another title or genre.</p>
+    </section>
+
+    <section class="genre-section" id="genres">
+      <div><p class="eyebrow">EXPLORE YOUR MOOD</p><h2>Browse by genre</h2></div>
+      <div class="genre-list">
+        <button data-genre-filter="Action">Action <span>↗</span></button>
+        <button data-genre-filter="Adventure">Adventure <span>↗</span></button>
+        <button data-genre-filter="Animation">Animation <span>↗</span></button>
+        <button data-genre-filter="Comedy">Comedy <span>↗</span></button>
+        <button data-genre-filter="Drama">Drama <span>↗</span></button>
+        <button data-genre-filter="Sci-Fi">Sci-Fi <span>↗</span></button>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div><p class="eyebrow">MADE FOR MOVIE LOVERS</p><h2>Less scrolling.<br><span>Better watching.</span></h2><p>Build your personal watchlist and keep discovering stories worth your time.</p></div>
+      <a class="cta-button" href="#trending">Explore movies <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">M</span><span>MOVI<span class="brand-accent">QO</span></span></a><p>Discover stories. Find your next favorite.</p><small>Demo website · Movie data and artwork shown here are illustrative placeholders. MOVIQO is not affiliated with any film studio or streaming service.</small></footer>
+  <script src="script.js"></script>
+</body>
+</html>
