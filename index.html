@@ -1,3 +1,4 @@
+{ display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(11, 11, 11, 0.85); backdrop-filter: blur(15px); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.08); } .logo { font-size: 24px; font-weight: 700; color: #e50914; display: flex; align-items: center; gap: 10px; letter-spacing: 0.5px; cursor: pointer; } .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; } .nav-links a:hover, .nav-links a.active { color: #fff; } .search-box { display: flex; align-items: center; background: rgba(255, 255, 255, 0.08); border-radius: 30px; padding: 8px 18px; width: 280px; border: 1px solid rgba(255,255,255,0.12); transition: all 0.3s; } .search-box:focus-within { border-color: #e50914; background: rgba(0,0,0,0.6); width: 320px; } .search-box input { background: transparent; border: none; color: #fff; outline: none; width: 100%; padding-left: 10px; font-size: 14px; } .search-box i { color: #aaa; }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -633,6 +634,13 @@
 
         // Initialize
         fetch10000Movies();
+
+        // Register Monetag Service Worker (sw.js)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Monetag Service Worker registered successfully!'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        }
     </script>
 </body>
 </html>
