@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moviqo Movies - 10,000+ Hollywood & Bollywood Movies</title>
+    <title>Moviqo Movies - Stream 10,000+ Movies & Shows</title>
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,21 +15,24 @@
             font-family: 'Poppins', sans-serif;
         }
         body {
-            background-color: #0f0f0f;
+            background-color: #0b0b0b;
             color: #ffffff;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+        /* Navbar */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(15, 15, 15, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
+            padding: 18px 5%;
+            background: rgba(11, 11, 11, 0.85);
+            backdrop-filter: blur(15px);
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
         .logo {
             font-size: 24px;
@@ -38,19 +41,38 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
         }
         .search-box {
             display: flex;
             align-items: center;
-            background: #222;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 30px;
             padding: 8px 18px;
-            width: 320px;
-            border: 1px solid #333;
-            transition: border-color 0.3s;
+            width: 280px;
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: all 0.3s;
         }
         .search-box:focus-within {
             border-color: #e50914;
+            background: rgba(0,0,0,0.6);
+            width: 320px;
         }
         .search-box input {
             background: transparent;
@@ -62,69 +84,98 @@
             font-size: 14px;
         }
         .search-box i {
-            color: #888;
+            color: #aaa;
         }
+
+        /* Hero Banner */
         .hero {
-            background: linear-gradient(to top, #0f0f0f, rgba(15,15,15,0.4)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(0deg, #0b0b0b 0%, rgba(11,11,11,0.4) 50%, rgba(11,11,11,0.8) 100%), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            height: 420px;
+            height: 550px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 40px 5%;
+            padding: 50px 5%;
+            margin-top: 65px;
         }
         .hero-content {
-            max-width: 600px;
+            max-width: 650px;
+        }
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .badge {
+            background: rgba(229, 9, 20, 0.2);
+            color: #e50914;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(229, 9, 20, 0.4);
         }
         .hero h1 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             color: #fff;
+            line-height: 1.1;
         }
         .hero p {
             font-size: 15px;
             color: #ccc;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .hero-btn-group {
+            display: flex;
+            gap: 15px;
         }
         .hero-btn {
             background: #e50914;
             color: #fff;
             border: none;
-            padding: 12px 28px;
-            border-radius: 6px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             font-size: 15px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: background 0.3s, transform 0.2s;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
         }
         .hero-btn:hover {
             background: #b20710;
-            transform: scale(1.05);
+            transform: translateY(-2px);
         }
+
+        /* Container & Categories */
         .container {
             padding: 40px 5%;
         }
         .categories {
             display: flex;
             gap: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
+        }
+        .categories::-webkit-scrollbar {
+            display: none;
         }
         .cat-btn {
-            background: #1f1f1f;
+            background: #1a1a1a;
             color: #aaa;
-            border: 1px solid #333;
-            padding: 8px 20px;
-            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            padding: 10px 22px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
             white-space: nowrap;
             transition: all 0.3s;
         }
@@ -132,71 +183,103 @@
             background: #e50914;
             color: #fff;
             border-color: #e50914;
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
         }
         .section-title {
             font-size: 22px;
             font-weight: 600;
-            margin-bottom: 24px;
             border-left: 4px solid #e50914;
             padding-left: 12px;
+            letter-spacing: 0.5px;
         }
         .loading {
             text-align: center;
-            padding: 60px;
+            padding: 80px;
             font-size: 18px;
             color: #888;
         }
+
+        /* Movie Grid */
         .movie-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 25px;
         }
         .movie-card {
-            background: #1a1a1a;
+            background: #161616;
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.35s ease;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             position: relative;
             border: 1px solid #222;
         }
         .movie-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(229, 9, 20, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
             border-color: #444;
         }
-        .movie-card:hover::after {
-            content: "\f04b";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 32px;
-            color: #fff;
-            background: rgba(229, 9, 20, 0.9);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        .poster-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
         }
         .movie-poster {
             width: 100%;
-            height: 280px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .movie-card:hover .movie-poster {
+            transform: scale(1.08);
+        }
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .movie-card:hover .play-overlay {
+            opacity: 1;
+        }
+        .play-overlay i {
+            font-size: 40px;
+            color: #fff;
+            background: #e50914;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        .movie-card:hover .play-overlay i {
+            transform: scale(1);
         }
         .movie-info {
-            padding: 15px;
+            padding: 16px;
         }
         .movie-title {
             font-size: 15px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -210,8 +293,12 @@
         .rating {
             color: #f5c518;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
-        /* Modal Player Styles */
+
+        /* Cinematic Modal */
         .modal {
             display: none;
             position: fixed;
@@ -219,27 +306,33 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
         .modal-content {
-            background: #1a1a1a;
+            background: #141414;
             width: 100%;
-            max-width: 900px;
-            border-radius: 14px;
+            max-width: 950px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
-            border: 1px solid #333;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: modalFade 0.3s ease;
+        }
+        @keyframes modalFade {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         .video-container {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
-            height: 0;
+            background: #000;
         }
         .video-container iframe {
             position: absolute;
@@ -250,70 +343,96 @@
             border: none;
         }
         .modal-details {
-            padding: 25px;
+            padding: 30px;
         }
         .modal-header-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         .modal-title {
-            font-size: 22px;
+            font-size: 26px;
             font-weight: 700;
         }
-        .modal-desc {
-            color: #aaa;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
         .close-btn {
-            background: #e50914;
+            background: rgba(255,255,255,0.1);
             color: #fff;
             border: none;
-            padding: 10px 22px;
-            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: background 0.3s;
         }
         .close-btn:hover {
-            background: #b20710;
+            background: #e50914;
         }
+        .modal-meta-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        .modal-desc {
+            color: #bbb;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 40px;
-            background: #0a0a0a;
+            padding: 50px 20px;
+            background: #070707;
             color: #666;
             font-size: 14px;
-            margin-top: 60px;
-            border-top: 1px solid #222;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
+
         @media(max-width: 768px) {
-            header { flex-direction: column; gap: 15px; }
-            .search-box { width: 100%; }
-            .hero h1 { font-size: 28px; }
+            header { padding: 15px 5%; }
+            .nav-links { display: none; }
+            .search-box { width: 220px; }
+            .hero { height: 450px; }
+            .hero h1 { font-size: 32px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><i class="fa-solid fa-film"></i> Moviqo Movies</div>
+        <div class="logo"><i class="fa-solid fa-film"></i> Moviqo</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#" onclick="filterCategory('Bollywood', document.querySelectorAll('.cat-btn')[1])">Bollywood</a></li>
+            <li><a href="#" onclick="filterCategory('Action', document.querySelectorAll('.cat-btn')[2])">Action</a></li>
+            <li><a href="#" onclick="filterCategory('Sci-Fi', document.querySelectorAll('.cat-btn')[3])">Sci-Fi</a></li>
+        </ul>
         <div class="search-box">
             <i class="fa-solid fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search 10,000+ movies & Bollywood..." oninput="searchMovies()">
+            <input type="text" id="searchInput" placeholder="Search 10,000+ movies..." oninput="searchMovies()">
         </div>
     </header>
 
     <!-- Hero Spotlight Banner -->
     <div class="hero">
         <div class="hero-content">
-            <h1 id="heroTitle">Loading Featured Title...</h1>
-            <p id="heroDesc">Explore 10,000+ Hollywood & Bollywood movies instantly.</p>
-            <button class="hero-btn" onclick="playHeroMovie()"><i class="fa-solid fa-play"></i> Watch Trailer</button>
+            <div class="hero-badges">
+                <span class="badge">4K Ultra HD</span>
+                <span class="badge" id="heroRatingBadge"><i class="fa-solid fa-star"></i> 8.5</span>
+            </div>
+            <h1 id="heroTitle">Pathaan</h1>
+            <p id="heroDesc">An exiled Indian spy is assigned to take down a ruthless mercenary who has a plot to destroy India in this high-octane blockbuster thriller.</p>
+            <div class="hero-btn-group">
+                <button class="hero-btn" onclick="playHeroMovie()"><i class="fa-solid fa-play"></i> Watch Trailer</button>
+            </div>
         </div>
     </div>
 
@@ -328,12 +447,14 @@
             <button class="cat-btn" onclick="filterCategory('Animation', this)">Animation</button>
         </div>
 
-        <div class="section-title" id="sectionTitle">Library (Loading 10,000+ Titles...)</div>
-        <div id="loadingMessage" class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading 10,000+ movies & Bollywood data...</div>
+        <div class="section-header">
+            <div class="section-title" id="sectionTitle">Trending Catalog</div>
+        </div>
+        <div id="loadingMessage" class="loading"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading 10,000+ cinematic titles...</div>
         <div class="movie-grid" id="movieGrid"></div>
     </div>
 
-    <!-- Video Modal -->
+    <!-- Cinematic Video Modal -->
     <div class="modal" id="movieModal">
         <div class="modal-content">
             <div class="video-container">
@@ -342,31 +463,33 @@
             <div class="modal-details">
                 <div class="modal-header-flex">
                     <div class="modal-title" id="modalTitle">Movie Title</div>
-                    <button class="close-btn" onclick="closeModal()">Close Player</button>
+                    <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                <p class="modal-desc" id="modalDesc">Movie synopsis and details go here.</p>
+                <div class="modal-meta-row">
+                    <span id="modalYear">2023</span>
+                    <span id="modalRating" style="color: #f5c518;"><i class="fa-solid fa-star"></i> 8.5</span>
+                    <span id="modalCategory" style="color: #e50914; font-weight: 500;">Action</span>
+                </div>
+                <p class="modal-desc" id="modalDesc">Movie synopsis goes here.</p>
             </div>
         </div>
     </div>
 
     <footer>
-        &copy; 2025 Moviqo Movies. All rights reserved. 10,000+ Hollywood & Bollywood Catalog.
+        &copy; 2025 Moviqo Movies Inc. All rights reserved. Premium Streaming Experience.
     </footer>
 
     <script>
         let allMovies = [];
         let featuredMovie = null;
 
-        // Curated Bollywood Blockbusters
         const bollywoodMovies = [
             { title: "Pathaan", category: "Bollywood", rating: "8.5", year: "2023", poster: "https://image.tmdb.org/t/p/w500/rKxybH3E0N0WnZ6n29Rk912066.jpg", summary: "An exiled Indian spy is assigned to take down a ruthless mercenary who has a plot to destroy India.", trailer: "https://www.youtube.com/embed/vqu4z34wENw" },
             { title: "Jawan", category: "Bollywood", rating: "8.6", year: "2023", poster: "https://image.tmdb.org/t/p/w500/jPtIv0kILgU0Xg3b88R955Y4H.jpg", summary: "A high-octane emotional thriller outlining the journey of a man who is set to rectify the wrongs in society.", trailer: "https://www.youtube.com/embed/COv52Qyctws" },
             { title: "Animal", category: "Bollywood", rating: "8.2", year: "2023", poster: "https://image.tmdb.org/t/p/w500/8LKqL2P5y1P0P991P0P991P0P.jpg", summary: "A son's intense emotional obsession with his enigmatic father leads to a violent underworld saga.", trailer: "https://www.youtube.com/embed/8FkLRUJjJHA" },
             { title: "3 Idiots", category: "Bollywood", rating: "9.1", year: "2009", poster: "https://image.tmdb.org/t/p/w500/66A9MqXOyVFCX6SFJcQ80yZ1w.jpg", summary: "Two friends search for their long lost college companion. They revisit their college days and remember their friend who inspired them.", trailer: "https://www.youtube.com/embed/xvszmNXdM4w" },
             { title: "Dangal", category: "Bollywood", rating: "8.8", year: "2016", poster: "https://image.tmdb.org/t/p/w500/3OXi0a2gA22x7i2zT7jX1v102.jpg", summary: "Former wrestler Mahavir Singh Phogat trains his daughters to become world-class wrestlers against all societal odds.", trailer: "https://www.youtube.com/embed/x_7YlGv9u1g" },
-            { title: "Gadar 2", category: "Bollywood", rating: "7.8", year: "2023", poster: "https://image.tmdb.org/t/p/w500/r0x9rWv3j092P55.jpg", summary: "Tara Singh crosses the border once again to rescue his son from Pakistan during the 1971 war.", trailer: "https://www.youtube.com/embed/zO9rWv3j092P55" },
-            { title: "RRR", category: "Bollywood", rating: "8.9", year: "2022", poster: "https://image.tmdb.org/t/p/w500/nEuStAkM82xX01lA0D07Z9k5.jpg", summary: "A fictional story about two legendary revolutionaries and their journey away from home before they started fighting for their country.", trailer: "https://www.youtube.com/embed/NgBoMJy386M" },
-            { title: "KGF: Chapter 2", category: "Bollywood", rating: "8.4", year: "2022", poster: "https://image.tmdb.org/t/p/w500/khvT81e053kQoYh1935z2tQWzX.jpg", summary: "In the blood-soaked Kolar Gold Fields, Rocky's name strikes fear into his foes while the government sees him as a threat.", trailer: "https://www.youtube.com/embed/JKa05nyUmuQ" }
+            { title: "RRR", category: "Bollywood", rating: "8.9", year: "2022", poster: "https://image.tmdb.org/t/p/w500/nEuStAkM82xX01lA0D07Z9k5.jpg", summary: "A fictional story about two legendary revolutionaries and their journey away from home before they started fighting for their country.", trailer: "https://www.youtube.com/embed/NgBoMJy386M" }
         ];
 
         const trailersList = [
@@ -382,7 +505,6 @@
         async function fetch10000Movies() {
             try {
                 let fetchedShows = [];
-                // Fetch pages 0 through 40 (approx 10,000 titles: 40 pages * 250 shows = 10,000 shows)
                 for (let page = 0; page <= 40; page++) {
                     const response = await fetch(`https://api.tvmaze.com/shows?page=${page}`);
                     const data = await response.json();
@@ -390,7 +512,7 @@
                 }
 
                 const apiMovies = fetchedShows.map((show, index) => {
-                    const cleanSummary = show.summary ? show.summary.replace(/<[^>]*>?/gm, '') : 'No synopsis available for this title.';
+                    const cleanSummary = show.summary ? show.summary.replace(/<[^>]*>?/gm, '') : 'No synopsis available for this cinematic title.';
                     return {
                         title: show.name,
                         category: categoriesList[index % categoriesList.length],
@@ -402,17 +524,17 @@
                     };
                 });
 
-                // Combine Bollywood movies at the front with the 10,000+ API catalog
                 allMovies = [...bollywoodMovies, ...apiMovies];
 
                 if (allMovies.length > 0) {
-                    featuredMovie = allMovies[0]; // Pathaan as default featured
+                    featuredMovie = allMovies[0];
                     document.getElementById('heroTitle').innerText = featuredMovie.title;
                     document.getElementById('heroDesc').innerText = featuredMovie.summary;
+                    document.getElementById('heroRatingBadge').innerHTML = `<i class="fa-solid fa-star"></i> ${featuredMovie.rating}`;
                 }
 
                 document.getElementById('loadingMessage').style.display = 'none';
-                document.getElementById('sectionTitle').innerText = `Catalog (${allMovies.length.toLocaleString()} Titles Available)`;
+                document.getElementById('sectionTitle').innerText = `Trending Catalog (${allMovies.length.toLocaleString()} Titles)`;
                 displayMovies(allMovies);
             } catch (error) {
                 document.getElementById('loadingMessage').innerText = 'Failed to load movie database.';
@@ -426,17 +548,21 @@
             grid.innerHTML = '';
             
             if (movies.length === 0) {
-                grid.innerHTML = '<p style="color: #888; grid-column: 1/-1; text-align: center; padding: 40px;">No movies found.</p>';
+                grid.innerHTML = '<p style="color: #888; grid-column: 1/-1; text-align: center; padding: 60px;">No cinematic titles found.</p>';
                 return;
             }
 
-            // Display up to 300 items at a time for fast page performance
             movies.slice(0, 300).forEach(movie => {
                 const card = document.createElement('div');
                 card.className = 'movie-card';
                 card.onclick = () => openModal(movie);
                 card.innerHTML = `
-                    <img src="${movie.poster}" class="movie-poster" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                    <div class="poster-container">
+                        <img src="${movie.poster}" class="movie-poster" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                        <div class="play-overlay">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
                     <div class="movie-info">
                         <div class="movie-title" title="${movie.title}">${movie.title}</div>
                         <div class="movie-meta">
@@ -452,7 +578,7 @@
         function filterCategory(category, btn) {
             currentCategory = category;
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if(btn) btn.classList.add('active');
             
             applyFilters();
         }
@@ -486,11 +612,13 @@
         function openModal(movie) {
             const modal = document.getElementById('movieModal');
             const iframe = document.getElementById('movieIframe');
-            const title = document.getElementById('modalTitle');
-            const desc = document.getElementById('modalDesc');
             
-            title.innerText = movie.title;
-            desc.innerText = movie.summary;
+            document.getElementById('modalTitle').innerText = movie.title;
+            document.getElementById('modalDesc').innerText = movie.summary;
+            document.getElementById('modalYear').innerText = movie.year;
+            document.getElementById('modalRating').innerHTML = `<i class="fa-solid fa-star"></i> ${movie.rating}`;
+            document.getElementById('modalCategory').innerText = movie.category;
+
             iframe.src = movie.trailer + "?autoplay=1";
             modal.style.display = 'flex';
         }
@@ -503,7 +631,7 @@
             modal.style.display = 'none';
         }
 
-        // Initialize 10,000+ movies fetch
+        // Initialize
         fetch10000Movies();
     </script>
 </body>
