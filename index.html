@@ -105,10 +105,30 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
         }
         .movie-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+        }
+        .movie-card:hover::after {
+            content: "\f04b";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: #fff;
+            background: rgba(229, 9, 20, 0.8);
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
         }
         .movie-poster {
             width: 100%;
@@ -135,6 +155,66 @@
         .rating {
             color: #f5c518;
             font-weight: 500;
+        }
+        /* Modal Player Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: #1f1f1f;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .modal-details {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .close-btn {
+            background: #e50914;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .close-btn:hover {
+            background: #b20710;
         }
         footer {
             text-align: center;
@@ -164,7 +244,7 @@
 
     <div class="hero">
         <h1>Unlimited Movies & TV Shows</h1>
-        <p>Discover and stream your favorite movies instantly.</p>
+        <p>Click any movie card to watch its official trailer instantly.</p>
     </div>
 
     <div class="container">
@@ -172,25 +252,37 @@
         <div class="movie-grid" id="movieGrid"></div>
     </div>
 
+    <!-- Video Modal -->
+    <div class="modal" id="movieModal">
+        <div class="modal-content">
+            <div class="video-container">
+                <iframe id="movieIframe" src="" allowfullscreen></iframe>
+            </div>
+            <div class="modal-details">
+                <div class="modal-title" id="modalTitle">Movie Title</div>
+                <button class="close-btn" onclick="closeModal()">Close Player</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         &copy; 2025 Moviqo Movies. All rights reserved.
     </footer>
 
     <script>
-        // Reliable curated movie dataset with posters and ratings
         const moviesList = [
-            { title: "Inception", rating: "8.8", year: "2010", poster: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg" },
-            { title: "Interstellar", rating: "8.7", year: "2014", poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
-            { title: "The Dark Knight", rating: "9.0", year: "2008", poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
-            { title: "Avengers: Endgame", rating: "8.4", year: "2019", poster: "https://image.tmdb.org/t/p/w500/ulzhLuWrPK07P1dKDcbQLZXDWv7.jpg" },
-            { title: "Spider-Man: Across the Spider-Verse", rating: "8.7", year: "2023", poster: "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" },
-            { title: "Oppenheimer", rating: "8.9", year: "2023", poster: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" },
-            { title: "Avatar: The Way of Water", rating: "7.6", year: "2022", poster: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" },
-            { title: "The Matrix", rating: "8.7", year: "1999", poster: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" },
-            { title: "Gladiator", rating: "8.5", year: "2000", poster: "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg" },
-            { title: "Titanic", rating: "7.9", year: "1997", poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg" },
-            { title: "The Lord of the Rings: The Fellowship of the Ring", rating: "8.8", year: "2001", poster: "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg" },
-            { title: "Joker", rating: "8.4", year: "2019", poster: "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg" }
+            { title: "Inception", rating: "8.8", year: "2010", poster: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg", trailer: "https://www.youtube.com/embed/YoHD9XEInc0" },
+            { title: "Interstellar", rating: "8.7", year: "2014", poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", trailer: "https://www.youtube.com/embed/zSWdZVtXT7E" },
+            { title: "The Dark Knight", rating: "9.0", year: "2008", poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", trailer: "https://www.youtube.com/embed/EXeTwQWrcwY" },
+            { title: "Avengers: Endgame", rating: "8.4", year: "2019", poster: "https://image.tmdb.org/t/p/w500/ulzhLuWrPK07P1dKDcbQLZXDWv7.jpg", trailer: "https://www.youtube.com/embed/TcMBFSGVi1c" },
+            { title: "Spider-Man: Across the Spider-Verse", rating: "8.7", year: "2023", poster: "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg", trailer: "https://www.youtube.com/embed/cqGjhVJWtEg" },
+            { title: "Oppenheimer", rating: "8.9", year: "2023", poster: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", trailer: "https://www.youtube.com/embed/uYPbbksJxIg" },
+            { title: "Avatar: The Way of Water", rating: "7.6", year: "2022", poster: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg", trailer: "https://www.youtube.com/embed/d9MyW72ELq0" },
+            { title: "The Matrix", rating: "8.7", year: "1999", poster: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", trailer: "https://www.youtube.com/embed/vKQi3bBA1y8" },
+            { title: "Gladiator", rating: "8.5", year: "2000", poster: "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg", trailer: "https://www.youtube.com/embed/P5c_o_GiNfk" },
+            { title: "Titanic", rating: "7.9", year: "1997", poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg", trailer: "https://www.youtube.com/embed/kVrqfYjkTdQ" },
+            { title: "The Lord of the Rings: Fellowship", rating: "8.8", year: "2001", poster: "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg", trailer: "https://www.youtube.com/embed/V75dMMIW2B4" },
+            { title: "Joker", rating: "8.4", year: "2019", poster: "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg", trailer: "https://www.youtube.com/embed/zAGVQLHvwOY" }
         ];
 
         function displayMovies(movies) {
@@ -205,6 +297,7 @@
             movies.forEach(movie => {
                 const card = document.createElement('div');
                 card.className = 'movie-card';
+                card.onclick = () => openModal(movie);
                 card.innerHTML = `
                     <img src="${movie.poster}" class="movie-poster" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
                     <div class="movie-info">
@@ -217,6 +310,24 @@
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        function openModal(movie) {
+            const modal = document.getElementById('movieModal');
+            const iframe = document.getElementById('movieIframe');
+            const title = document.getElementById('modalTitle');
+            
+            title.innerText = movie.title;
+            iframe.src = movie.trailer + "?autoplay=1";
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('movieModal');
+            const iframe = document.getElementById('movieIframe');
+            
+            iframe.src = ""; // Stops the video
+            modal.style.display = 'none';
         }
 
         function filterMovies() {
